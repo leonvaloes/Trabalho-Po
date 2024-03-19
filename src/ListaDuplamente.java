@@ -99,7 +99,7 @@ public class ListaDuplamente {
                 pos.getAnt().setInfo(atual);
                 pos.setInfo(ant);
             }
-                i = i.getProx();
+            i = i.getProx();
             pos.setInfo(aux);
 
         }
@@ -235,5 +235,44 @@ public class ListaDuplamente {
         }
     }
 
+    public int tamanhoLista(){
+        int tamanho = 0;
+        No i = inicio;
+        while (i!=null)
+        {
+            i = i.getProx();
+            tamanho++;
+        }
+        return tamanho;
+    }
+    public void shellSort(){
+        int salto = 1, TL = tamanhoLista(), j, elem;
+        No  auxJ;
+        while (salto < TL/3)
+        {
+            salto = 3 * salto + 1;
+        }
+        while (salto > 0)
+        {
+            for (int i = salto; i < TL; i++)
+            {
+                elem = buscaeEmPosEspecificaLista(i).getInfo();
+                j = i;
+                while (j >= salto && buscaeEmPosEspecificaLista(j - salto).getInfo() > elem)
+                {
+                    auxJ = buscaeEmPosEspecificaLista(j);
+                    auxJ.setInfo(buscaeEmPosEspecificaLista(j - salto).getInfo());
+                    j -= salto;
+                }
+                auxJ = buscaeEmPosEspecificaLista(j);
+                auxJ.setInfo(elem);
+            }
+            salto = salto / 3;
+        }
+    }
+
+    public void heapSort(){
+
+    }
 
 }
